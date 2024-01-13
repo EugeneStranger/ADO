@@ -1,6 +1,6 @@
 ﻿//#define ClASS_WORK
-//#define QUERY_AUTHOR_WITH_BOOKS
-#define INSERT_FROM_USER
+#define QUERY_AUTHOR_WITH_BOOKS
+//#define INSERT_FROM_USER
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,8 +52,8 @@ namespace Introduction_to_ADO
                     first_name,
                     last_name,
                     Books.Title                
-                FROM Authors, Books
-                WHERE Authors.id = Books.author
+                FROM Authors INNER JOIN Books
+                ON Authors.id = Books.author
             ";
             SqlCommand cmd = new SqlCommand(select_string, connection);
             cmd.CommandText = select_string;
