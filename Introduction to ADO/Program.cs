@@ -49,8 +49,8 @@ namespace Introduction_to_ADO
             connection.Open();
             string select_string = @"
                 SELECT 
-                    first_name,
-                    last_name,
+                    Authors.first_name,
+                    Authors.last_name,
                     Books.Title                
                 FROM Authors INNER JOIN Books
                 ON Authors.id = Books.author
