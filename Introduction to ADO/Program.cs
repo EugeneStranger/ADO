@@ -1,6 +1,6 @@
 ﻿//#define ClASS_WORK
-#define QUERY_AUTHOR_WITH_BOOKS
-//#define INSERT_FROM_USER
+//#define QUERY_AUTHOR_WITH_BOOKS
+#define INSERT_FROM_USER
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +71,6 @@ namespace Introduction_to_ADO
             //string insert_string;
             while (key != ConsoleKey.Escape)
             {
-                key = Console.ReadKey().Key;
                 if (key == ConsoleKey.D1)
                 {
                     Console.WriteLine();
@@ -134,6 +133,7 @@ namespace Introduction_to_ADO
                     }
                 connection.Close();
                 }
+                key = Console.ReadKey().Key;
             }
 
 #endif
