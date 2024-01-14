@@ -1,6 +1,6 @@
 ﻿//#define ClASS_WORK
-#define QUERY_AUTHOR_WITH_BOOKS
-//#define INSERT_FROM_USER
+//#define QUERY_AUTHOR_WITH_BOOKS
+#define INSERT_FROM_USER
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +54,10 @@ namespace Introduction_to_ADO
                     Books.Title                
                 FROM Authors INNER JOIN Books
                 ON Authors.id = Books.author
+                GROUP BY 
+                    Authors.first_name,
+                    Authors.last_name,
+                    Books.Title       
             ";
             SqlCommand cmd = new SqlCommand(select_string, connection);
             cmd.CommandText = select_string;
@@ -61,12 +65,13 @@ namespace Introduction_to_ADO
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                Console.WriteLine($"{rdr[0]} {rdr[1]} {rdr[2]}");
+                Console.WriteLine($"{rdr[0]} {rdr[1]}\t - {rdr[2]}");
             }
             connection.Close(); //Соединение обязательно нужно закрывать
 #endif
 #if INSERT_FROM_USER
-            Console.WriteLine("Выберите желаемое действие: \n1 - Добавить автора\n2 - Добавить книгу\n3 - Показать всех авторов\n4 - Показать все книги\nEscape - выход");
+            Console.WriteLine("Выберите желаемое действие: \n1 - Добавить автора\n2 - Добавить книгу\n3 - Показать всех авторов" +
+                                                "\n4 - Показать все книги с id\n5 - Показать все книги с авторами\nEscape - выход");
             ConsoleKey key = Console.ReadKey().Key;
             //string insert_string;
             while (key != ConsoleKey.Escape)
@@ -115,7 +120,7 @@ namespace Introduction_to_ADO
                     SqlDataReader rdr = cmd.ExecuteReader();
                     while (rdr.Read())
                     {
-                        Console.WriteLine($"{rdr[0]} {rdr[1]} {rdr[2]}");
+                        Console.WriteLine($"{rdr[0]}\t {rdr[1]} {rdr[2]}");
                     }
                     connection.Close();
                 }
@@ -129,10 +134,36 @@ namespace Introduction_to_ADO
                     SqlDataReader rdr = cmd.ExecuteReader();
                     while (rdr.Read())
                     {
-                        Console.WriteLine($"{rdr[0]} {rdr[1]} {rdr[2]}");
+                        Console.WriteLine($"{rdr[0]}\t {rdr[1]}\t {rdr[2]}");
                     }
                 connection.Close();
                 }
+                if (key == ConsoleKey.D5)
+                {
+                    connection.Open();
+                    Console.WriteLine("\n");
+                    string select_string = @"
+                    SELECT 
+                        Authors.first_name,
+                        Authors.last_name,
+                        Books.Title                
+                    FROM Authors INNER JOIN Books
+                    ON Authors.id = Books.author
+                    GROUP BY 
+                        Authors.first_name,
+                        Authors.last_name,
+                        Books.Title       
+                    ";
+                    SqlCommand cmd = new SqlCommand(select_string, connection);
+                    cmd.CommandText = select_string;
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        Console.WriteLine($"{rdr[0]} {rdr[1]}\t - {rdr[2]}");
+                    }
+                    connection.Close();
+                }
+
                 key = Console.ReadKey().Key;
             }
 
