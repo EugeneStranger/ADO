@@ -1,6 +1,6 @@
 ﻿//#define ClASS_WORK
 //#define QUERY_AUTHOR_WITH_BOOKS
-#define INSERT_FROM_USER
+//#define INSERT_FROM_USER
 using System;
 using System.Collections.Generic;
 using System.Linq;
