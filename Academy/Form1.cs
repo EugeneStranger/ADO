@@ -160,6 +160,7 @@ namespace Academy
         private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvStudents.DataSource = null;
+
             SqlCommand cmd = new SqlCommand();
             cmd.Connection= connection;
             if (cbDirection.SelectedItem != null) cmd.Parameters.Add("@direction", cbDirection.SelectedItem);
