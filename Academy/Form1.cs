@@ -360,13 +360,25 @@ namespace Academy
         private void btnDelete_Click(object sender, EventArgs e)
         {
             TablesStorage storage = new TablesStorage();
-            storage.GetDataFromBase("Groups,Directions", "group_name, direction_name", "direction=direction_id");
-            dataGridViewGroups.DataSource = storage.Set.Tables[0];
-            foreach (DataGridViewCell cell in dataGridViewGroups.SelectedCells)
-            {
-                dataGridViewGroups.Rows.RemoveAt(cell.RowIndex);
-            }
-            storage.Adapter.Update(storage.Set);
+            //storage.GetDataFromBase("Groups,Directions", "group_name, direction_name", "direction=direction_id");
+            //dataGridViewGroups.DataSource = storage.Set.Tables[0];
+            storage.GetDataFromBase("Groups");
+            //dataGridViewGroups.DataSource = storage.Set.Tables[0];
+            //foreach (DataGridViewCell cell in dataGridViewGroups.SelectedCells)
+            //{
+            //    storage.Set.Tables[0].Rows.RemoveAt(cell.RowIndex);
+            ////    MessageBox.Show(this, storage.Set.Tables[0].ToString());
+            ////    //dataGridViewGroups.Rows.RemoveAt(cell.RowIndex);
+            //}
+            //int deleted_rows = storage.Adapter.Update(storage.Set.Tables["Groups"]);
+            //MessageBox.Show(this, deleted_rows.ToString());
+            //cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
+            ////storage.Adapter.Update(storage.Set);
+            MessageBox.Show(this, dataGridViewGroups.SelectedRows[0].Cells["group_name"].Value.ToString(), "Info");
+            DataRow[] rows = storage.Set.Tables["Groups"].Select($"group_name = '{dataGridViewGroups.SelectedRows[0].Cells["group_name"].Value.ToString()}'");
+            rows[0].Delete();
+            storage.Adapter.Update(storage.Set,"Groups");
+            cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
         }
         private string BitSetToDays(byte bitSet)
         {
