@@ -113,12 +113,21 @@ namespace Academy
             {
                 table.Columns.Add(reader.GetName(i));
             }
+            //table.Columns.Add("Дни обучения");            
             while (reader.Read())
             {
                 DataRow row = table.NewRow();
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
                     row[i] = reader[i];
+                }
+                //if (row["learning_days"] != null)
+                try
+                {
+                    row["learning_days"] = BitSetToDays(Convert.ToByte(row["learning_days"]));
+                }
+                catch (Exception e)
+                {
                 }
                 table.Rows.Add(row);
             }
@@ -319,7 +328,7 @@ namespace Academy
         {
             //SelectDataFromTable(dataGridViewGroups, "Groups", "group_name", "direction");
             string commandLine = $@"
-                SELECT group_name, direction_name 
+                SELECT group_name, direction_name, learning_days
                 FROM Groups JOIN Directions ON direction=direction_id
                 ";
             if (cbDirectionOnGroupTab.SelectedIndex != 0)
@@ -337,10 +346,43 @@ namespace Academy
             //LoadDataToComboBox(add.CBLearningForms, "LearningForms", "form_name", "Выберите форму обучения");
             //LoadDataToComboBox(add.CBLearningTime, "LearningTimes", "time_name", "Выберите время обучения");
             DialogResult result = add.ShowDialog();
-            if (result == DialogResult.OK) 
+            //if (result == DialogResult.OK) 
+            //{
+            //TablesStorage storage = new TablesStorage();
+            //storage.GetDataFromBase("Groups, Directions", "group_name, direction_name",);
+            //cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
+            //}
+            //TablesStorage storage;
+            //storage.GetDataFromBase()
+            cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            TablesStorage storage = new TablesStorage();
+            storage.GetDataFromBase("Groups,Directions", "group_name, direction_name", "direction=direction_id");
+            dataGridViewGroups.DataSource = storage.Set.Tables[0];
+            foreach (DataGridViewCell cell in dataGridViewGroups.SelectedCells)
             {
-                
+                dataGridViewGroups.Rows.RemoveAt(cell.RowIndex);
             }
+            storage.Adapter.Update(storage.Set);
+        }
+        private string BitSetToDays(byte bitSet)
+        {
+            string[] week = { "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
+            string days = "";
+            for (int i = 0; i < week.Length; i++)
+            {
+                byte day = 1;
+                day <<= i;
+                if ((day & bitSet) != 0)
+                {
+                    int day_index = (int)Math.Log(day & bitSet, 2);
+                    days += week[day_index] + ", ";
+                }
+            }
+            return days;
         }
     }
 }
