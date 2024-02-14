@@ -38,12 +38,12 @@
             this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.cbGroup = new System.Windows.Forms.ComboBox();
             this.tabPageGroups = new System.Windows.Forms.TabPage();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.lblGroupsCount = new System.Windows.Forms.Label();
             this.cbDirectionOnGroupTab = new System.Windows.Forms.ComboBox();
             this.btnGroupAdd = new System.Windows.Forms.Button();
             this.dataGridViewGroups = new System.Windows.Forms.DataGridView();
             this.tabPageTeachers = new System.Windows.Forms.TabPage();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
@@ -152,6 +152,8 @@
             this.dgvStudents.Location = new System.Drawing.Point(5, 71);
             this.dgvStudents.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.ReadOnly = true;
+            this.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStudents.Size = new System.Drawing.Size(884, 398);
             this.dgvStudents.TabIndex = 1;
             // 
@@ -179,6 +181,16 @@
             this.tabPageGroups.TabIndex = 2;
             this.tabPageGroups.Text = "Группы";
             this.tabPageGroups.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(604, 6);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(141, 23);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Удалить группу";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // lblGroupsCount
             // 
@@ -218,8 +230,11 @@
             this.dataGridViewGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewGroups.Location = new System.Drawing.Point(3, 39);
             this.dataGridViewGroups.Name = "dataGridViewGroups";
+            this.dataGridViewGroups.ReadOnly = true;
+            this.dataGridViewGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewGroups.Size = new System.Drawing.Size(885, 430);
             this.dataGridViewGroups.TabIndex = 0;
+            this.dataGridViewGroups.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGroups_CellContentClick);
             // 
             // tabPageTeachers
             // 
@@ -231,16 +246,6 @@
             this.tabPageTeachers.TabIndex = 1;
             this.tabPageTeachers.Text = "Преподаватели";
             this.tabPageTeachers.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(604, 6);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(141, 23);
-            this.btnDelete.TabIndex = 4;
-            this.btnDelete.Text = "Удалить группу";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // Form1
             // 

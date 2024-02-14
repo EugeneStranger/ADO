@@ -41,6 +41,7 @@ namespace Academy
             cbWeek = new CheckBox[7];
             
         }
+
         byte GetBitSet()
         {
             byte days = 0;

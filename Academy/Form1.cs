@@ -327,14 +327,18 @@ namespace Academy
         private void cbDirectionOnGroupTab_SelectedIndexChanged(object sender, EventArgs e)
         {
             //SelectDataFromTable(dataGridViewGroups, "Groups", "group_name", "direction");
-            string commandLine = $@"
-                SELECT group_name, direction_name, learning_days
-                FROM Groups JOIN Directions ON direction=direction_id
-                ";
+            string condition = "";
             if (cbDirectionOnGroupTab.SelectedIndex != 0)
-            {
-               commandLine += $@"WHERE direction_name='{cbDirectionOnGroupTab.SelectedItem}'"; 
-            }
+                condition += $@"WHERE direction_name='{cbDirectionOnGroupTab.SelectedItem}'";
+
+            string commandLine = $@"
+                SELECT group_name, learning_days, direction_name, [number_of_students]=COUNT(stud_id)
+                FROM Groups JOIN Directions ON direction=direction_id
+                LEFT JOIN Students ON [group]=[group_id]
+                    {condition}
+                GROUP BY [group_id], [group_name], [learning_days], [direction_name]
+                ORDER BY [group_id]
+                ";
             SelectDataFromTable(dataGridViewGroups, commandLine);
             lblGroupsCount.Text = $"Количество групп: {dataGridViewGroups.Rows.Count - 1}";
         }
@@ -375,7 +379,8 @@ namespace Academy
             //cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
             ////storage.Adapter.Update(storage.Set);
             MessageBox.Show(this, dataGridViewGroups.SelectedRows[0].Cells["group_name"].Value.ToString(), "Info");
-            DataRow[] rows = storage.Set.Tables["Groups"].Select($"group_name = '{dataGridViewGroups.SelectedRows[0].Cells["group_name"].Value.ToString()}'");
+            DataRow[] rows = storage.Set.Tables["Groups"].
+                Select($"group_name = '{dataGridViewGroups.SelectedRows[0].Cells["group_name"].Value.ToString()}'");
             rows[0].Delete();
             storage.Adapter.Update(storage.Set,"Groups");
             cbDirectionOnGroupTab_SelectedIndexChanged(sender, e);
@@ -395,6 +400,11 @@ namespace Academy
                 }
             }
             return days;
+        }
+
+        private void dataGridViewGroups_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
