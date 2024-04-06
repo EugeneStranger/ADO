@@ -52,16 +52,18 @@ namespace Library
             {
                 connection.Open();
                 string command =
-                 $@"
-                 IF NOT EXISTS (SELECT id FROM Authors WHERE last_name = {last_name} AND first_name = {first_name})
+                    $@"
+                 IF NOT EXISTS (SELECT id FROM Authors WHERE last_name = '{last_name}' AND first_name = '{first_name}')
                  BEGIN
-                     INSERT INTO Authors (last_name, first_name) 
-                     VALUES ({last_name}, {first_name});
-
-                     INSER INTO 
-                     Books (author, title, price, pages)
-                     VALUES ((SELECT id FROM Authors WHERE last_name = {last_name} AND first_name = {first_name}), '{title}',{price},{pages});
-                 END";
+                 INSERT INTO Authors (last_name, first_name) 
+                 VALUES ('{last_name}', '{first_name}')
+                 END
+                 ;
+                DECLARE @id     int     = (SELECT id FROM Authors WHERE last_name='{last_name}' AND first_name='{first_name}')
+                INSERT INTO 
+                Books	(author, title, price, pages)
+                VALUES	((SELECT id FROM Authors WHERE last_name='{last_name}' AND first_name='{first_name}') , '{title}', '{price}', '{pages}');
+                ";
                 cmd = new SqlCommand(command, connection);
                 cmd.ExecuteNonQuery();
             }
