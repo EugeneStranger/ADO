@@ -17,9 +17,9 @@ namespace Library
             Console.WriteLine(connectionString);
 
             Library library = new Library(connectionString);
-            library.InsertAuthor("Bjarne", "Stroustrup");
-            library.SelectAuthors();
-
+            library.InsertAuthor("sss", "sss");
+            //library.SelectAuthors();
+            //Console.WriteLine();
         }
     }
 }
