@@ -20,7 +20,7 @@ namespace Library
             //library.InsertAuthor("sss", "sss");
             //library.SelectAuthors();
             //library.InsertBook("Muller", "Scott", "FFFFF", "129", "999");
-            library.SelectBooks("Muller");
+            library.SelectBooks("Muller", "Scott");
         }
     }
 }

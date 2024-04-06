@@ -114,7 +114,7 @@ namespace Library
                 if (connection != null) connection.Close();
             }
         }
-        public void SelectBooks(string author_last_name)
+        public void SelectBooks(string author_last_name, string author_first_name)
         {
             try
             {
@@ -123,7 +123,9 @@ namespace Library
 											title AS Title,
 											[Author] = FORMATMESSAGE('%s %s', first_name, last_name)
 									FROM Books, Authors
-									WHERE last_name = '{author_last_name}' AND Authors.id = Books.author";
+									WHERE last_name = '{author_last_name}' 
+                                    AND Authors.first_name = '{author_first_name}' 
+                                    AND Authors.id = Books.author";
                 cmd = new SqlCommand(command, connection);
                 SqlDataReader reader = cmd.ExecuteReader();
                 Console.WriteLine($"{reader.GetName(0).ToString().PadRight(32)} {reader.GetName(1).ToString().PadRight(32)}");
