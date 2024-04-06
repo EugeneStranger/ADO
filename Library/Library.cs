@@ -114,5 +114,28 @@ namespace Library
                 if (connection != null) connection.Close();
             }
         }
+        public void SelectBooks(string author_last_name)
+        {
+            try
+            {
+                connection.Open();
+                string command = $@"SELECT 
+											title AS Title,
+											[Author] = FORMATMESSAGE('%s %s', first_name, last_name)
+									FROM Books, Authors
+									WHERE last_name = '{author_last_name}' AND Authors.id = Books.author";
+                cmd = new SqlCommand(command, connection);
+                SqlDataReader reader = cmd.ExecuteReader();
+                Console.WriteLine($"{reader.GetName(0).ToString().PadRight(32)} {reader.GetName(1).ToString().PadRight(32)}");
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader[0].ToString().PadRight(32)} {reader[1].ToString().PadRight(32)}");
+                }
+            }
+            finally
+            {
+                if (connection != null) connection.Close();
+            }
+        }
     }
 }

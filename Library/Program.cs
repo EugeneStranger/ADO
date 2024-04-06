@@ -19,7 +19,8 @@ namespace Library
             Library library = new Library(connectionString);
             //library.InsertAuthor("sss", "sss");
             //library.SelectAuthors();
-            library.InsertBook("Muller", "Scott", "FFFFF", "129", "999");
+            //library.InsertBook("Muller", "Scott", "FFFFF", "129", "999");
+            library.SelectBooks("Muller");
         }
     }
 }
