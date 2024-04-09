@@ -32,34 +32,45 @@ namespace Liubrary3
                 MessageBoxIcon.Information);
             richTextBoxQuery.SelectAll();
             richTextBoxQuery.SelectionAlignment = HorizontalAlignment.Center;
-            LoadTablesToComboBox();
+            //LoadTablesToComboBox();
+
+            string command = $@"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
+            SqlCommand cmd = new SqlCommand(command,connection);
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader(); 
+            while (reader.Read())
+            {
+                cbTables.Items.Add(reader[0]);
+            }
+            connection.Close();
         }
 
         private void buttonExecute_Click(object sender, EventArgs e)
         {
-            string cmdLine = richTextBoxQuery.Text;
-            SqlCommand cmd = new SqlCommand(cmdLine, connection);
-            connection.Open();
-            reader = cmd.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++) table.Columns.Add(reader.GetName(i));
-            while (reader.Read())
-            {
-                DataRow row = table.NewRow();
-                for (int i = 0; i< reader.FieldCount;i++) row[i] = reader[i];
-                table.Rows.Add(row);
-            }
-            dataGridView.DataSource = table;
-            connection.Close();
+            string command = richTextBoxQuery.Text;
+            LoadDataToGrid(command);
+            //SqlCommand cmd = new SqlCommand(cmdLine, connection);
+            //connection.Open();
+            //reader = cmd.ExecuteReader();
+            //table = new DataTable();
+            //for (int i = 0; i < reader.FieldCount; i++) table.Columns.Add(reader.GetName(i));
+            //while (reader.Read())
+            //{
+            //   DataRow row = table.NewRow();
+            //    for (int i = 0; i< reader.FieldCount;i++) row[i] = reader[i];
+            //    table.Rows.Add(row);
+            //}
+            //dataGridView.DataSource = table;
+            //connection.Close();
         }
         public void LoadTablesToComboBox()
         {
-            string commandLine = $@"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
+            string commandLine = $@"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
             SqlCommand cmd = new SqlCommand(commandLine, connection);
             connection.Open();
             reader = cmd.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++) table.Columns.Add(reader.GetName(i));
+            //table = new DataTable();
+            //for (int i = 0; i < reader.FieldCount; i++) table.Columns.Add(reader.GetName(i));
             while (reader.Read())
             {
                 cbTables.Items.Add(reader[0]);
@@ -67,5 +78,42 @@ namespace Liubrary3
             reader.Close();
             connection.Close();
          }
+
+        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string command = $@"SELECT * FROM {cbTables.SelectedItem.ToString()}";
+            LoadDataToGrid(command);
+            //SqlCommand cmd = new SqlCommand(command, connection);
+            //connection.Open();
+            //table = new DataTable();
+            //SqlDataReader reader = cmd.ExecuteReader();
+            //for (int i = 0; i < reader.FieldCount; i++) 
+            //    table.Columns.Add(reader.GetName(i));
+            //while (reader.Read())
+            //{
+            //    DataRow row = table.NewRow();
+            //    for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
+            //    table.Rows.Add(row);
+            //}
+            //dataGridView.DataSource = table;
+            //connection.Close();
+        }
+        void LoadDataToGrid(string command)
+        {
+            SqlCommand cmd = new SqlCommand(command, connection);
+            connection.Open();
+            table = new DataTable();
+            SqlDataReader reader = cmd.ExecuteReader();
+            for (int i = 0; i < reader.FieldCount; i++)
+                table.Columns.Add(reader.GetName(i));
+            while (reader.Read())
+            {
+                DataRow row = table.NewRow();
+                for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
+                table.Rows.Add(row);
+            }
+            dataGridView.DataSource = table;
+            connection.Close();
+        }
     }
 }

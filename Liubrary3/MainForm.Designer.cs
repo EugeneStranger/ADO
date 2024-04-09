@@ -65,9 +65,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(13, 88);
+            this.dataGridView.Location = new System.Drawing.Point(13, 74);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(776, 414);
+            this.dataGridView.Size = new System.Drawing.Size(776, 428);
             this.dataGridView.TabIndex = 2;
             // 
             // cbTables
@@ -75,9 +75,10 @@
             this.cbTables.FormattingEnabled = true;
             this.cbTables.Location = new System.Drawing.Point(13, 47);
             this.cbTables.Name = "cbTables";
-            this.cbTables.Size = new System.Drawing.Size(776, 21);
+            this.cbTables.Size = new System.Drawing.Size(675, 21);
             this.cbTables.TabIndex = 3;
             this.cbTables.Text = "Tables";
+            this.cbTables.SelectedIndexChanged += new System.EventHandler(this.cbTables_SelectedIndexChanged);
             // 
             // MainForm
             // 
