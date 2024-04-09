@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library2", "Library2\Librar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{7A96C0A1-FA36-4C6E-894A-246AFCE121E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liubrary3", "Liubrary3\Liubrary3.csproj", "{53FF1EC7-DE47-45D8-9270-2675650C3C45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library3", "Liubrary3\Library3.csproj", "{53FF1EC7-DE47-45D8-9270-2675650C3C45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
