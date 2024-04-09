@@ -39,7 +39,12 @@ namespace Library
                 //@ - RAW-строка (Чтобы разносить строку как угодно)
                 //$ - интерполяция
                 cmd = new SqlCommand(command, connection);
-                cmd.ExecuteNonQuery();
+                SqlParameter[] values = new SqlParameter[]
+            {
+                    new SqlParameter("paramLastName", last_name);
+                new SqlParameter("paramFirstName", first_name);
+            };
+            cmd.ExecuteNonQuery();
             }
             finally
             {

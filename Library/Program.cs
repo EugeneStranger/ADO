@@ -17,10 +17,12 @@ namespace Library
             Console.WriteLine(connectionString);
 
             Library library = new Library(connectionString);
-            //library.InsertAuthor("sss", "sss");
+            library.InsertAuthor("Gage", "Randy");
             //library.SelectAuthors();
             //library.InsertBook("Muller", "Scott", "FFFFF", "129", "999");
-            library.SelectBooks("Muller", "Scott");
+            //library.SelectBooks("Gage", "Randy");
+
+            //////////////////////////////Параметризованные запросы//////////////////////////
         }
     }
 }
