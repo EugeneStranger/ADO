@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 19.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "PolicePD_321", "PolicePD_321.ssmssqlproj", "{BE839384-686F-4C62-87C9-1BB274B722A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE839384-686F-4C62-87C9-1BB274B722A7}.Default|Default.ActiveCfg = Default
+		{B71B92CA-EDB6-4A45-AC94-6FE25C98F1D6}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A6B8ADD-65BC-40FC-A0C0-2CF84FE43A1F}
+	EndGlobalSection
+EndGlobal

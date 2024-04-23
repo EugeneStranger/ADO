@@ -31,12 +31,9 @@ namespace Academy321
                 Console.WriteLine(connectionString);
             }
             connection = new SqlConnection(connectionString);
-            //LoadGroupsToComboBox();
-            //LoadDirectionsToComboBox();
             LoadDataToComboBox(comboBoxStudentsGroup, "Groups", "group_name");
             LoadDataToComboBox(comboBoxStudentsDirection, "Directions", "direction_name");
             //LoadStudents();
-
         }
         void LoadStudents(string condition=null)
         {
@@ -51,7 +48,7 @@ FROM Students
 JOIN Groups ON ([group] = group_id)
 JOIN Directions ON (direction = direction_id)
             ";
-            if (condition != null) 
+            if (condition != null && !condition.Contains("Все")) 
             { 
                 cmd += $" WHERE {condition}"; 
             }
@@ -125,11 +122,23 @@ JOIN Directions ON (direction = direction_id)
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool FreeConsole();
-
+        private void setStatus()
+        {
+            toolStripStatusLabelStudentsCount.Text = $"Количество студентов: {dataGridViewStudents.RowCount - 1}";
+            if(comboBoxStudentsDirection.SelectedItem?.ToString() == "Все")
+            {
+                toolStripStatusLabelGroupsCount.Text = $"Всего групп: {comboBoxStudentsGroup.Items.Count - 1}";
+            }
+            else
+            {
+                toolStripStatusLabelGroupsCount.Text = $"Групп по выбранному направлению: {comboBoxStudentsGroup.Items.Count-1}";
+            }
+        }
         private void comboBoxStudentsGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadStudents($"group_name = '{comboBoxStudentsGroup.SelectedItem.ToString()}'");
             labelCountStudentsInGroups.Text = "Количество студентов в группе: " + (dataGridViewStudents.RowCount-1);
+            setStatus();
         }
 
         private void comboBoxStudentsDirection_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,6 +156,7 @@ JOIN Directions ON (direction = direction_id)
             labelGroupsCount.Text = "Количество групп на данном направлении: " + (comboBoxStudentsGroup.Items.Count-1);
             LoadStudents($"direction_name = '{comboBoxStudentsDirection.SelectedItem.ToString()}'");
             labelCountStudentsOnDirection.Text = "Количество студентов на направлении: " + (dataGridViewStudents.RowCount - 1);
+            setStatus();
         }
     }
    

@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -72,6 +75,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Queries\PolicePD_321.ssmssqlproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +83,13 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Queries\PoliceDB_321.sql" />
+    <Content Include="Queries\SQLQuery1 - Responsibilities.sql" />
+    <Content Include="Queries\SQLQuery7.sql" />
+    <Content Include="Queries\SQLQuery2 - ResponsibilitiesType.sql" />
+    <Content Include="Queries\SQLQuery2.sql" />
+    <Content Include="Queries\SQLQuery3 - Violations.sql" />
+    <Content Include="Queries\SQLQuery4  - ViolationsResponsibilitiesRelation.sql" />
+    <Content Include="Queries\SQLQuery6 - FillResponsibilityTypes.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
