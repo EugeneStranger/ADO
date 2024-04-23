@@ -28,7 +28,7 @@ namespace Academy321
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             if (AllocConsole())
             {
-                Console.WriteLine(connectionString);
+                Console.WriteLine(connectionString); 
             }
             connection = new SqlConnection(connectionString);
             LoadDataToComboBox(comboBoxStudentsGroup, "Groups", "group_name");
