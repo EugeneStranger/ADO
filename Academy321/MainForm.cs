@@ -31,42 +31,55 @@ namespace Academy321
                 Console.WriteLine(connectionString); 
             }
             connection = new SqlConnection(connectionString);
+            LoadStudents();
             LoadDataToComboBox(comboBoxStudentsGroup, "Groups", "group_name");
-            LoadDataToComboBox(comboBoxStudentsDirection, "Directions", "direction_name");
-            //LoadStudents();
+            LoadDataToComboBox(comboBoxStudentsDirection, "Directions", "direction_name");            
         }
         void LoadStudents(string condition=null)
         {
-            connection.Open();
-            string cmd = $@"
-SELECT
-        [ФИО]               = FORMATMESSAGE('%s %s %s', last_name, first_name, middle_name),
-        [Дата Рождения]     = birth_date,
-        [Группа]            = group_name,
-        [Направление]       = direction_name
-FROM Students
-JOIN Groups ON ([group] = group_id)
-JOIN Directions ON (direction = direction_id)
+            //            connection.Open();
+            //            string cmd = $@"
+            //SELECT
+            //        [ФИО]               = FORMATMESSAGE('%s %s %s', last_name, first_name, middle_name),
+            //        [Дата Рождения]     = birth_date,
+            //        [Группа]            = group_name,
+            //        [Направление]       = direction_name
+            //FROM Students
+            //JOIN Groups ON ([group] = group_id)
+            //JOIN Directions ON (direction = direction_id)
+            //            ";
+            //            if (condition != null && !condition.Contains("Все")) 
+            //            { 
+            //                cmd += $" WHERE {condition}"; 
+            //            }
+            //            SqlCommand command = new SqlCommand(cmd, connection);
+            //            reader = command.ExecuteReader();
+            //            table = new DataTable();
+            //            for (int i = 0; i < reader.FieldCount; i++)
+            //            {
+            //                table.Columns.Add(reader.GetName(i));
+            //            }
+            //            while(reader.Read())
+            //            {
+            //                DataRow row = table.NewRow();
+            //                for (int i = 0; i < reader.FieldCount;i++) row[i] = reader[i];
+            //                table.Rows.Add(row);
+            //            }
+            //            dataGridViewStudents.DataSource = table;
+            //            connection.Close();
+
+            string columns = $@"
+            [ФИО]               = FORMATMESSAGE('%s %s %s', last_name, first_name, middle_name),
+            [Дата Рождения]     = birth_date,
+            [Группа]            = group_name,
+            [Направление]       = direction_name
             ";
-            if (condition != null && !condition.Contains("Все")) 
-            { 
-                cmd += $" WHERE {condition}"; 
-            }
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                table.Columns.Add(reader.GetName(i));
-            }
-            while(reader.Read())
-            {
-                DataRow row = table.NewRow();
-                for (int i = 0; i < reader.FieldCount;i++) row[i] = reader[i];
-                table.Rows.Add(row);
-            }
-            dataGridViewStudents.DataSource = table;
-            connection.Close();
+            string tables = "students, groups, directions";
+            string relations = "Students.[group]=group_id AND direction=direction_id";
+            if (condition != null && !condition.Contains("Все")) condition = $"{relations} AND {condition}";
+            else condition = relations;
+            Connector connector = new Connector();
+            dataGridViewStudents.DataSource =  connector.LoadColumnFromTable(columns,tables,condition);
         }
 
         public void LoadGroupsToComboBox()
@@ -100,20 +113,26 @@ JOIN Directions ON (direction = direction_id)
             list.Items.Clear();
             list.Items.Add("Все");
             list.SelectedIndex = 0;
-            string cmd = $@"SELECT {column} FROM {tables} ";
-            if (condition !=null)
-            {
-                cmd += $"WHERE {condition}";
-            }
-            SqlCommand command = new SqlCommand(cmd, connection);
-            connection.Open();
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                list.Items.Add(reader[0]);
-            }
-            reader.Close();
-            connection.Close();
+            //string cmd = $@"SELECT {column} FROM {tables} ";
+            //if (condition !=null)
+            //{
+            //    cmd += $"WHERE {condition}";
+            //}
+            //SqlCommand command = new SqlCommand(cmd, connection);
+            //connection.Open();
+            //reader = command.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    list.Items.Add(reader[0]);
+            //}
+            //connection.Close();
+
+            Connector connector = new Connector();
+            connector.LoadColumnFromTable(column, tables, condition);
+            string[] items = new string[connector.DataTable.Rows.Count];
+            for (int i = 0; i < items.Length; i++)
+                items[i] = connector.DataTable.Rows[i][0].ToString();
+            list.Items.AddRange(items);
         }
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
