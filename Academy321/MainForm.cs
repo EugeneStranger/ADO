@@ -17,10 +17,10 @@ namespace Academy321
     public partial class MainForm : Form
     {
         string connectionString;
-        SqlConnection connection;
-        DataTable table;
-        SqlDataReader reader;
-        SqlCommand command;
+        //SqlConnection connection;
+        //DataTable table;
+        //SqlDataReader reader;
+        //SqlCommand command;
 
         public MainForm()
         {
@@ -30,7 +30,7 @@ namespace Academy321
             {
                 Console.WriteLine(connectionString); 
             }
-            connection = new SqlConnection(connectionString);
+            //connection = new SqlConnection(connectionString);
             LoadStudents();
             LoadDataToComboBox(comboBoxStudentsGroup, "Groups", "group_name");
             LoadDataToComboBox(comboBoxStudentsDirection, "Directions", "direction_name");            
@@ -84,29 +84,29 @@ namespace Academy321
 
         public void LoadGroupsToComboBox()
         {
-            string cmd = @"SELECT group_name FROM Groups";
-            connection.Open();
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBoxStudentsGroup.Items.Add(reader[0]);
-            }
-            reader.Close();
-            connection.Close();
+            //string cmd = @"SELECT group_name FROM Groups";
+            //connection.Open();
+            //SqlCommand command = new SqlCommand(cmd, connection);
+            //reader = command.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    comboBoxStudentsGroup.Items.Add(reader[0]);
+            //}
+            //reader.Close();
+            //connection.Close();
         }
         public void LoadDirectionsToComboBox()
         {
-            string cmd = @"SELECT direction_name FROM Directions";
-            connection.Open();
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBoxStudentsDirection.Items.Add(reader[0]);
-            }
-            reader.Close();
-            connection.Close();
+            //string cmd = @"SELECT direction_name FROM Directions";
+            //connection.Open();
+            //SqlCommand command = new SqlCommand(cmd, connection);
+            //reader = command.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    comboBoxStudentsDirection.Items.Add(reader[0]);
+            //}
+            //reader.Close();
+            //connection.Close();
         }
         public void LoadDataToComboBox(System.Windows.Forms.ComboBox list, string tables, string column, string condition = null)
         {
