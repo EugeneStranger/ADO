@@ -137,7 +137,7 @@ JOIN Directions ON (direction = direction_id)
         private void comboBoxStudentsGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadStudents($"group_name = '{comboBoxStudentsGroup.SelectedItem.ToString()}'");
-            labelCountStudentsInGroups.Text = "Количество студентов в группе: " + (dataGridViewStudents.RowCount-1);
+            //labelCountStudentsInGroups.Text = "Количество студентов в группе: " + (dataGridViewStudents.RowCount-1);
             setStatus();
         }
 
@@ -153,10 +153,16 @@ JOIN Directions ON (direction = direction_id)
             {
                 LoadDataToComboBox(comboBoxStudentsGroup, "Groups", "group_name");
             }
-            labelGroupsCount.Text = "Количество групп на данном направлении: " + (comboBoxStudentsGroup.Items.Count-1);
+            //labelGroupsCount.Text = "Количество групп на данном направлении: " + (comboBoxStudentsGroup.Items.Count-1);
             LoadStudents($"direction_name = '{comboBoxStudentsDirection.SelectedItem.ToString()}'");
-            labelCountStudentsOnDirection.Text = "Количество студентов на направлении: " + (dataGridViewStudents.RowCount - 1);
+            //labelCountStudentsOnDirection.Text = "Количество студентов на направлении: " + (dataGridViewStudents.RowCount - 1);
             setStatus();
+        }
+
+        private void buttonAddStudent_Click(object sender, EventArgs e)
+        {
+            FormStudent formStudent = new FormStudent();
+            formStudent.ShowDialog();
         }
     }
    
