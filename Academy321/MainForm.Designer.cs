@@ -59,7 +59,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(925, 551);
+            this.tabControl.Size = new System.Drawing.Size(957, 559);
             this.tabControl.TabIndex = 0;
             // 
             // tabPageStudents
@@ -75,7 +75,7 @@
             this.tabPageStudents.Location = new System.Drawing.Point(4, 22);
             this.tabPageStudents.Name = "tabPageStudents";
             this.tabPageStudents.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStudents.Size = new System.Drawing.Size(917, 525);
+            this.tabPageStudents.Size = new System.Drawing.Size(949, 533);
             this.tabPageStudents.TabIndex = 0;
             this.tabPageStudents.Text = "Студенты";
             // 
@@ -85,9 +85,9 @@
             this.statusTrip,
             this.toolStripStatusLabelStudentsCount,
             this.toolStripStatusLabelGroupsCount});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 500);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 508);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(911, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(943, 22);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -109,7 +109,7 @@
             // buttonAddStudent
             // 
             this.buttonAddStudent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddStudent.Location = new System.Drawing.Point(786, 12);
+            this.buttonAddStudent.Location = new System.Drawing.Point(818, 12);
             this.buttonAddStudent.Name = "buttonAddStudent";
             this.buttonAddStudent.Size = new System.Drawing.Size(125, 23);
             this.buttonAddStudent.TabIndex = 5;
@@ -125,9 +125,13 @@
             this.dataGridViewStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStudents.Location = new System.Drawing.Point(8, 41);
+            this.dataGridViewStudents.MultiSelect = false;
             this.dataGridViewStudents.Name = "dataGridViewStudents";
-            this.dataGridViewStudents.Size = new System.Drawing.Size(903, 481);
+            this.dataGridViewStudents.ReadOnly = true;
+            this.dataGridViewStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewStudents.Size = new System.Drawing.Size(935, 489);
             this.dataGridViewStudents.TabIndex = 4;
+            this.dataGridViewStudents.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStudents_CellDoubleClick);
             // 
             // comboBoxStudentsGroup
             // 
@@ -152,9 +156,9 @@
             this.comboBoxStudentsDirection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxStudentsDirection.FormattingEnabled = true;
-            this.comboBoxStudentsDirection.Location = new System.Drawing.Point(419, 14);
+            this.comboBoxStudentsDirection.Location = new System.Drawing.Point(387, 12);
             this.comboBoxStudentsDirection.Name = "comboBoxStudentsDirection";
-            this.comboBoxStudentsDirection.Size = new System.Drawing.Size(361, 21);
+            this.comboBoxStudentsDirection.Size = new System.Drawing.Size(393, 21);
             this.comboBoxStudentsDirection.TabIndex = 1;
             this.comboBoxStudentsDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxStudentsDirection_SelectedIndexChanged);
             // 
@@ -163,7 +167,7 @@
             this.labelStudentsDirection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStudentsDirection.AutoSize = true;
-            this.labelStudentsDirection.Location = new System.Drawing.Point(289, 17);
+            this.labelStudentsDirection.Location = new System.Drawing.Point(257, 17);
             this.labelStudentsDirection.Name = "labelStudentsDirection";
             this.labelStudentsDirection.Size = new System.Drawing.Size(124, 13);
             this.labelStudentsDirection.TabIndex = 0;
@@ -174,7 +178,7 @@
             this.tabPageGroups.Location = new System.Drawing.Point(4, 22);
             this.tabPageGroups.Name = "tabPageGroups";
             this.tabPageGroups.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGroups.Size = new System.Drawing.Size(917, 525);
+            this.tabPageGroups.Size = new System.Drawing.Size(949, 533);
             this.tabPageGroups.TabIndex = 1;
             this.tabPageGroups.Text = "Группы";
             this.tabPageGroups.UseVisualStyleBackColor = true;
@@ -184,7 +188,7 @@
             this.tabPageScheduale.Location = new System.Drawing.Point(4, 22);
             this.tabPageScheduale.Name = "tabPageScheduale";
             this.tabPageScheduale.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageScheduale.Size = new System.Drawing.Size(917, 525);
+            this.tabPageScheduale.Size = new System.Drawing.Size(949, 533);
             this.tabPageScheduale.TabIndex = 2;
             this.tabPageScheduale.Text = "Расписание";
             this.tabPageScheduale.UseVisualStyleBackColor = true;
@@ -194,7 +198,7 @@
             this.tabPageTeachers.Location = new System.Drawing.Point(4, 22);
             this.tabPageTeachers.Name = "tabPageTeachers";
             this.tabPageTeachers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTeachers.Size = new System.Drawing.Size(917, 525);
+            this.tabPageTeachers.Size = new System.Drawing.Size(949, 533);
             this.tabPageTeachers.TabIndex = 3;
             this.tabPageTeachers.Text = "Преподаватели";
             this.tabPageTeachers.UseVisualStyleBackColor = true;
@@ -204,7 +208,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(925, 551);
+            this.ClientSize = new System.Drawing.Size(957, 559);
             this.Controls.Add(this.tabControl);
             this.Name = "MainForm";
             this.Text = "AcademyPD_321";

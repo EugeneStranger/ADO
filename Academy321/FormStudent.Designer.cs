@@ -36,7 +36,7 @@
             this.richTextBoxFirstName = new System.Windows.Forms.RichTextBox();
             this.richTextBoxMiddleName = new System.Windows.Forms.RichTextBox();
             this.labelBirthDate = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerBirthDate = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanelStudent = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelDirection = new System.Windows.Forms.TableLayoutPanel();
             this.labelDirection = new System.Windows.Forms.Label();
@@ -52,6 +52,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonBrows = new System.Windows.Forms.Button();
+            this.labelID = new System.Windows.Forms.Label();
             this.tableLayoutPanelStudent.SuspendLayout();
             this.tableLayoutPanelDirection.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -142,15 +143,15 @@
             this.labelBirthDate.Text = "Дата рождения:";
             this.labelBirthDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // dateTimePicker1
+            // dateTimePickerBirthDate
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(178, 126);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(257, 22);
-            this.dateTimePicker1.TabIndex = 8;
+            this.dateTimePickerBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePickerBirthDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePickerBirthDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(178, 126);
+            this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
+            this.dateTimePickerBirthDate.Size = new System.Drawing.Size(257, 22);
+            this.dateTimePickerBirthDate.TabIndex = 8;
             // 
             // tableLayoutPanelStudent
             // 
@@ -159,7 +160,7 @@
             this.tableLayoutPanelStudent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanelStudent.Controls.Add(this.labelBirthDate, 0, 3);
             this.tableLayoutPanelStudent.Controls.Add(this.richTextBoxMiddleName, 1, 2);
-            this.tableLayoutPanelStudent.Controls.Add(this.dateTimePicker1, 1, 3);
+            this.tableLayoutPanelStudent.Controls.Add(this.dateTimePickerBirthDate, 1, 3);
             this.tableLayoutPanelStudent.Controls.Add(this.richTextBoxFirstName, 1, 1);
             this.tableLayoutPanelStudent.Controls.Add(this.labelLastName, 0, 0);
             this.tableLayoutPanelStudent.Controls.Add(this.labelMiddleName, 0, 2);
@@ -222,6 +223,7 @@
             this.comboBoxDirection.Name = "comboBoxDirection";
             this.comboBoxDirection.Size = new System.Drawing.Size(257, 21);
             this.comboBoxDirection.TabIndex = 2;
+            this.comboBoxDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxDirection_SelectedIndexChanged);
             // 
             // comboBoxGroup
             // 
@@ -318,6 +320,7 @@
             this.buttonSave.TabIndex = 13;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonCancel
             // 
@@ -333,12 +336,24 @@
             // buttonBrows
             // 
             this.buttonBrows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonBrows.Location = new System.Drawing.Point(594, 290);
+            this.buttonBrows.Location = new System.Drawing.Point(594, 268);
             this.buttonBrows.Name = "buttonBrows";
             this.buttonBrows.Size = new System.Drawing.Size(120, 29);
             this.buttonBrows.TabIndex = 15;
             this.buttonBrows.Text = "Обзор";
             this.buttonBrows.UseVisualStyleBackColor = true;
+            this.buttonBrows.Click += new System.EventHandler(this.buttonBrows_Click);
+            // 
+            // labelID
+            // 
+            this.labelID.AutoSize = true;
+            this.labelID.BackColor = System.Drawing.SystemColors.Control;
+            this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelID.Location = new System.Drawing.Point(465, 319);
+            this.labelID.Name = "labelID";
+            this.labelID.Size = new System.Drawing.Size(130, 16);
+            this.labelID.TabIndex = 16;
+            this.labelID.Text = "ID студента в базе";
             // 
             // FormStudent
             // 
@@ -346,6 +361,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(719, 375);
+            this.Controls.Add(this.labelID);
             this.Controls.Add(this.buttonBrows);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
@@ -364,6 +380,7 @@
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhoto)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -375,7 +392,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxMiddleName;
         private System.Windows.Forms.RichTextBox richTextBoxFirstName;
         private System.Windows.Forms.Label labelBirthDate;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBirthDate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelStudent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelDirection;
         private System.Windows.Forms.Label labelDirection;
@@ -391,5 +408,6 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonBrows;
+        private System.Windows.Forms.Label labelID;
     }
 }
